@@ -1,0 +1,14 @@
+mat-form-field {
+    margin-top: 20px;
+}
+
+.secondFormGroup {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.add-signer .remove-signer {
+    cursor: pointer;
+}

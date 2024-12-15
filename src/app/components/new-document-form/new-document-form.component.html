@@ -1,0 +1,43 @@
+  <mat-stepper #stepper>
+    <mat-step [stepControl]="documentInfoGroup">
+      <form [formGroup]="documentInfoGroup" class="documentInfoGroup">
+        <ng-template matStepLabel>Informações do documento</ng-template>
+        <mat-form-field>
+            <mat-label>Nome do documento</mat-label>
+            <input matInput placeholder="Digite o nome do documento" formControlName="title" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>URL do PDF</mat-label>
+            <input matInput placeholder="Digite a URL do PDF" formControlName="documentUrl" required>  
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Próximo</button>
+        </div>
+      </form>
+      {{ documentInfoGroup.value | json }}
+    </mat-step>
+    <mat-step [stepControl]="signerInfoGroup" label="Informações dos signatários">
+      <form [formGroup]="signerInfoGroup">
+        <div formArrayName="signers">
+            <div *ngFor="let signer of signers.controls; let i = index" [formGroupName]="i" class="secondFormGroup">
+                <mat-form-field>
+                    <mat-label>Nome do signatário</mat-label>
+                    <input matInput placeholder="Digite o nome do signatário" formControlName="name" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Email do signatário</mat-label>
+                    <input matInput placeholder="Digite o email do signatário" formControlName="email" required>
+                </mat-form-field>
+                <mat-icon *ngIf="i !== signers.length - 1" aria-hidden="false" aria-label="Adicionar novo assinante" class="remove-signer" (click)="deleteSigner(i)">delete</mat-icon>
+                <mat-icon *ngIf="i === signers.length - 1" aria-hidden="false" aria-label="Adicionar novo assinante" class="add-signer" (click)="addSigner()">add</mat-icon>
+            </div>
+        </div>
+        <div>
+          <button mat-button matStepperPrevious>Voltar</button>
+          <button mat-button matStepperNext (click)="onSubmit()">Enviar</button>
+        </div>
+      </form>
+      {{ signerInfoGroup.value | json }}
+    </mat-step>
+  </mat-stepper>
+  
