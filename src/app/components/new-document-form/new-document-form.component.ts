@@ -11,6 +11,8 @@ import { DocumentService } from '../../services/document.service';
 import { CreateDocumentRequest } from '../../interfaces/documents';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { Company } from '../../interfaces/entities';
 
 @Component({
   selector: 'app-new-document-form',
@@ -24,7 +26,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatIconModule,
     CommonModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule
   ],
   templateUrl: './new-document-form.component.html',
   styleUrls: ['./new-document-form.component.css']
@@ -32,6 +35,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 export class NewDocumentFormComponent implements OnInit {
   documentInfoGroup!: FormGroup;
   signerInfoGroup!: FormGroup;
+  companies: Company[] = [];
 
   loading = false;
 
@@ -45,9 +49,14 @@ export class NewDocumentFormComponent implements OnInit {
     this.documentInfoGroup = this._formBuilder.group({
       title: ['', Validators.required],
       documentUrl: ['', Validators.required],
+      companyId: ['', Validators.required]
     });
     this.signerInfoGroup = this._formBuilder.group({
       signers: this._formBuilder.array([this.createSigner()]),
+    });
+    this._documentService.getCompanies()
+      .subscribe((companies) => {
+        this.companies = companies;
     });
   }
 
@@ -61,7 +70,6 @@ export class NewDocumentFormComponent implements OnInit {
   public get signers() {
     return this.signerInfoGroup.get('signers') as FormArray;
   }
-
   addSigner(): void {
     this.signers.push(this.createSigner());
   }
@@ -76,7 +84,7 @@ export class NewDocumentFormComponent implements OnInit {
       document: {
         name: this.documentInfoGroup.value.title,
         url: this.documentInfoGroup.value.documentUrl,
-        company: 1
+        company: this.documentInfoGroup.value.companyId
       },
       signers: this.signerInfoGroup.value.signers
     };
@@ -86,9 +94,14 @@ export class NewDocumentFormComponent implements OnInit {
         duration: 4000,
       });
     }, (error) => {
-      this._snackBar.open('Erro ao criar documento 🥲', '');
+      this._snackBar.open('Erro ao criar documento 🥲', '', {
+        duration: 4000,
+      });
     }).add(() => {
       this.loading = false;
+      this.signerInfoGroup.reset();
+      this.documentInfoGroup.reset();
+      this.signers.reset({ signers: [this.createSigner()] });
     });
   }
 }

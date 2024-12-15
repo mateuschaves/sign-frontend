@@ -12,6 +12,14 @@
             <mat-label>URL do PDF</mat-label>
               <input matInput placeholder="Digite a URL do PDF" formControlName="documentUrl" required>  
           </mat-form-field>
+          <mat-form-field>
+            <mat-label>Empresa</mat-label>
+            <mat-select formControlName="companyId" required>
+              @for (company of companies; track companies) {
+                <mat-option [value]="company.id">{{company.name}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
         </div>
         <div>
           <button mat-button matStepperNext>Próximo</button>

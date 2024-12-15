@@ -9,3 +9,8 @@ export interface Signer {
     name:  string;
     email: string;
 }
+
+export interface Company {
+    id:   number;
+    name: string;
+}

@@ -9,8 +9,8 @@
         token:           string;
         name:            string;
         status:          string;
-        created_at:      Date;
-        last_updated_at: Date;
+        created_at:      Date | string;
+        last_updated_at: Date | string;
         created_by:      string;
         company:         number;
         external_id:     null;
