@@ -1,25 +1,27 @@
+<div class="new-document-form">
   <mat-stepper #stepper>
     <mat-step [stepControl]="documentInfoGroup">
-      <form [formGroup]="documentInfoGroup" class="documentInfoGroup">
-        <ng-template matStepLabel>Informações do documento</ng-template>
-        <mat-form-field>
-            <mat-label>Nome do documento</mat-label>
-            <input matInput placeholder="Digite o nome do documento" formControlName="title" required>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>URL do PDF</mat-label>
-            <input matInput placeholder="Digite a URL do PDF" formControlName="documentUrl" required>  
-        </mat-form-field>
+      <form [formGroup]="documentInfoGroup" >
+        <div class="documentInfoGroup">
+          <ng-template matStepLabel>Informações do documento</ng-template>
+          <mat-form-field>
+              <mat-label>Nome do documento</mat-label>
+              <input matInput placeholder="Digite o nome do documento" formControlName="title" required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>URL do PDF</mat-label>
+              <input matInput placeholder="Digite a URL do PDF" formControlName="documentUrl" required>  
+          </mat-form-field>
+        </div>
         <div>
           <button mat-button matStepperNext>Próximo</button>
         </div>
       </form>
-      {{ documentInfoGroup.value | json }}
     </mat-step>
     <mat-step [stepControl]="signerInfoGroup" label="Informações dos signatários">
       <form [formGroup]="signerInfoGroup">
         <div formArrayName="signers">
-            <div *ngFor="let signer of signers.controls; let i = index" [formGroupName]="i" class="secondFormGroup">
+            <div *ngFor="let signer of signers.controls; let i = index" [formGroupName]="i" class="signerInfoGroup">
                 <mat-form-field>
                     <mat-label>Nome do signatário</mat-label>
                     <input matInput placeholder="Digite o nome do signatário" formControlName="name" required>
@@ -37,7 +39,6 @@
           <button mat-button matStepperNext (click)="onSubmit()">Enviar</button>
         </div>
       </form>
-      {{ signerInfoGroup.value | json }}
     </mat-step>
   </mat-stepper>
-  
+</div>

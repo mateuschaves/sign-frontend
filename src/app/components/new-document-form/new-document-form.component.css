@@ -2,7 +2,14 @@ mat-form-field {
     margin-top: 20px;
 }
 
-.secondFormGroup {
+.signerInfoGroup {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.documentInfoGroup {
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -11,4 +18,10 @@ mat-form-field {
 
 .add-signer .remove-signer {
     cursor: pointer;
+}
+
+.new-document-form {
+    margin: 0 auto;
+    width: 80%;
+    padding-top: 16px;
 }
