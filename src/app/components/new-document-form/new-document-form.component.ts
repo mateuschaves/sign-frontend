@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -33,6 +33,8 @@ import { Company } from '../../interfaces/entities';
   styleUrls: ['./new-document-form.component.css']
 })
 export class NewDocumentFormComponent implements OnInit {
+  @Output() documentCreated = new EventEmitter<void>();
+
   documentInfoGroup!: FormGroup;
   signerInfoGroup!: FormGroup;
   companies: Company[] = [];
@@ -89,19 +91,25 @@ export class NewDocumentFormComponent implements OnInit {
       signers: this.signerInfoGroup.value.signers
     };
     this._documentService.createDocument(documentData)
-      .subscribe((response) => {
-      this._snackBar.open('Documento criado com sucesso 🎉', 'Ok!', {
-        duration: 4000,
-      });
-    }, (error) => {
-      this._snackBar.open('Erro ao criar documento 🥲', '', {
-        duration: 4000,
-      });
-    }).add(() => {
-      this.loading = false;
-      this.signerInfoGroup.reset();
-      this.documentInfoGroup.reset();
-      this.signers.reset({ signers: [this.createSigner()] });
+      .subscribe({
+      next: () => {
+        this._snackBar.open('Documento criado com sucesso 🎉', 'Ok!', {
+          duration: 4000,
+        });
+        this.documentCreated.emit();
+      },
+      error: () => {
+        this._snackBar.open('Erro ao criar documento 🥲', '', {
+          duration: 4000,
+        });
+      },
+      complete: () => {
+        this.loading = false;
+        this.signerInfoGroup.reset();
+        this.documentInfoGroup.reset();
+        this.signers.clear();
+        this.addSigner();
+      }
     });
   }
 }

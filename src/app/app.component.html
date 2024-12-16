@@ -1,6 +1,6 @@
 <router-outlet />
 
 <main>
-  <app-new-document-form></app-new-document-form>
+  <app-new-document-form (documentCreated)="onDocumentCreated()"></app-new-document-form>
   <app-document-list></app-document-list>
 </main>
