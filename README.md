@@ -1,6 +1,8 @@
 # SignFrontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.5.
+A simple CRUD application for managing documents, featuring integration with the ZapSign API for seamless electronic signature functionality
+
+![Project Logo](doc/arb.png)
 
 ## Development server
 
