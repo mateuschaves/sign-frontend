@@ -1,8 +1,11 @@
+import { SinatureStatusEnum } from "../nums/sinature";
 
 export interface SignDocument {
+    id?:     number;
     url:     string;
     name:    string;
     company: number;
+    status?: SinatureStatusEnum;
 }
 
 export interface Signer {
@@ -13,4 +16,5 @@ export interface Signer {
 export interface Company {
     id:   number;
     name: string;
+
 }

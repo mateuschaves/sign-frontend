@@ -1,0 +1,66 @@
+.container {
+    margin: 20px auto;
+    width: 80%;
+
+    padding: 8px 16px;
+}
+
+mat-card {
+    margin: 20px 0;
+}
+
+.chip-signed {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.chip-waiting {
+    background-color: #FFC107;
+    color: white;
+}
+
+.chip {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+    justify-content: center;
+
+    mat-icon {
+        font-size: 18px;
+    }
+}
+
+.divider-card {
+    margin: 8px 0;
+}
+
+span {
+    font-size: 26px;
+}
+
+mat-card-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+mat-card-header {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+}
+
+mat-icon {
+    font-size: 20px;
+}
+
+.pointer {
+    cursor: pointer;
+}

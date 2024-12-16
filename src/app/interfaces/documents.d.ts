@@ -1,8 +1,9 @@
+import { Company, SignDocument } from "./entities";
+
     export interface CreateDocumentRequest {
         document: SignDocument;
         signers:  Signer[];
     }
-    
     export interface CreateDocumentResponse {
         id:              number;
         open_id:         number;
@@ -15,11 +16,21 @@
         company:         number;
         external_id:     null;
     }
-    
+
+    export interface UpdateDocumentRequest {
+        name: string;
+        id: number;
+    }
+
+    export interface GetDocumentRequest extends SignDocument {
+        signers: Signer[];
+    }
     
     export interface ListDocumentsRequest {
         company: number;
     }
     
-    export interface ListDocumentsResponse extends Document {
+    export interface ListDocumentsResponse extends SignDocument {
+        signers: Signer[];
+        company: Company;
     }

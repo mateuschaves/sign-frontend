@@ -1,0 +1,42 @@
+<div class="update-document-form">
+    <span>Atualize seu documento</span>
+    <mat-stepper #stepper>
+      <mat-step [stepControl]="documentInfoGroup">
+        <form [formGroup]="documentInfoGroup">
+          <div class="documentInfoGroup">
+            <ng-template matStepLabel>Informações do documento</ng-template>
+            <mat-form-field>
+                <mat-label>Nome do documento</mat-label>
+                <input matInput placeholder="Digite o nome do documento" formControlName="title" required>
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-flat-button [disabled]="loading" (click)="updateDocument()">
+                <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+                <span *ngIf="!loading">Editar</span>
+              </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="signerInfoGroup" label="Informações dos signatários">
+        <form [formGroup]="signerInfoGroup">
+          <div formArrayName="signers">
+              <div *ngFor="let signer of signers.controls; let i = index" [formGroupName]="i" class="signerInfoGroup">
+                  <mat-form-field>
+                      <mat-label>Nome do signatário</mat-label>
+                      <input matInput placeholder="Digite o nome do signatário" formControlName="name" readonly>
+                  </mat-form-field>
+                  <mat-form-field>
+                      <mat-label>Email do signatário</mat-label>
+                      <input matInput placeholder="Digite o email do signatário" formControlName="email" readonly>
+                  </mat-form-field>
+                  <mat-icon aria-hidden="false" aria-label="Remover assinante" class="remove-signer" (click)="deleteSigner(signer)">delete</mat-icon>
+              </div>
+          </div>
+          <div>
+            <button mat-button matStepperPrevious>Voltar</button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-stepper>
+  </div>

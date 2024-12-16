@@ -5,6 +5,7 @@ mat-form-field {
 .signerInfoGroup {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: row;
     gap: 20px;
 }
@@ -13,14 +14,14 @@ mat-form-field {
     display: flex;
     align-items: center;
     flex-direction: row;
-    gap: 20px;
+    justify-content: center;
 }
 
-.add-signer .remove-signer {
+.remove-signer {
     cursor: pointer;
 }
 
-.new-document-form {
+.update-document-form {
     margin: 0 auto;
     width: 80%;
     padding-top: 16px;

@@ -7,5 +7,4 @@ import { Component } from '@angular/core';
   styleUrl: './signer-item.component.css'
 })
 export class SignerItemComponent {
-
 }
