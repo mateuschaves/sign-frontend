@@ -12,7 +12,7 @@ import { CreateDocumentRequest } from '../../interfaces/documents';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
-import { Company } from '../../interfaces/entities';
+import { Company, Signer } from '../../interfaces/entities';
 
 @Component({
   selector: 'app-new-document-form',
@@ -88,7 +88,7 @@ export class NewDocumentFormComponent implements OnInit {
         url: this.documentInfoGroup.value.documentUrl,
         company: this.documentInfoGroup.value.companyId
       },
-      signers: this.signerInfoGroup.value.signers
+      signers: this.signerInfoGroup?.value?.signers?.filter((signer: Signer) => signer.name && signer.email)
     };
     this._documentService.createDocument(documentData)
       .subscribe({
