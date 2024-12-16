@@ -3,8 +3,14 @@
     <ng-container *ngFor="let document of documents">
         <mat-card appearance="outlined">
             <mat-card-header>
-                <div class="card-title">{{ document.name }} - {{document.company.name}} <mat-icon>{{ document.status === 'SIGNED' ? 'check' : 'hourglass_top' }}</mat-icon></div>
-                <mat-card-subtitle (click)="openDialog(document.id)"><mat-icon class="pointer">edit</mat-icon></mat-card-subtitle>
+                <div class="header">
+                    <div class="card-title">{{ document.name }} - {{document.company.name}} <mat-icon>{{ document.status === 'SIGNED' ? 'check' : 'hourglass_top' }}</mat-icon></div>
+                        
+                    <div class="actions">
+                        <mat-card-subtitle (click)="areYouSure(document.id)"><mat-icon class="pointer">delete</mat-icon></mat-card-subtitle>
+                        <mat-card-subtitle (click)="openDialog(document.id)"><mat-icon class="pointer">edit</mat-icon></mat-card-subtitle>
+                    </div>
+                </div>
             </mat-card-header>
             <mat-divider class="divider-card"/>
             <mat-card-content>

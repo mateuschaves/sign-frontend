@@ -22,6 +22,9 @@ export class DocumentService {
   getDocuments(): Observable<ListDocumentsResponse[]> {
     return this.http.get<ListDocumentsResponse[]>(`${this.apiUrl}/documents/get`);
   }
+  deleteDocument(documentId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/documents/${documentId}/delete`);
+  }
   updateSigner(updateSignerData: UpdateSignerRequest): void {
     this.http.patch<void>(`${this.apiUrl}/signers/${updateSignerData.id}/patch`, updateSignerData);
   }

@@ -1,0 +1,11 @@
+<mat-list>
+    <mat-list-item>
+        <span matListItemTitle>{{this.title}}</span>
+    </mat-list-item>
+    <mat-list-item style="cursor: pointer;" (click)="closeDialog()">
+        <span matListItemTitle >Não</span>
+    </mat-list-item>
+    <mat-list-item (click)="confirm()" style="cursor: pointer; background-color: crimson; color: white; border-radius: 8px;">
+        <span matListItemTitle style="color: white">Sim</span>
+    </mat-list-item>   
+</mat-list>
