@@ -1,6 +1,5 @@
 import { Component, inject, Inject } from '@angular/core';
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 
 @Component({
@@ -12,7 +11,7 @@ import { MatListModule } from '@angular/material/list';
   styleUrl: './confirm-dialog.component.css'
 })
 export class ConfirmDialogComponent {
-  public title: string;
+  title: string;
   private _bottomSheetRef =
     inject<MatBottomSheetRef<ConfirmDialogComponent>>(MatBottomSheetRef);
 
